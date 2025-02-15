@@ -1,66 +1,51 @@
-#include<stdio.h>
+#include <stdio.h>
 #define MAX 4
 int queue[MAX];
-int top=0;
-void enqueue()
-{
-	int data;
-	if(MAX==top)
-	{
-		printf("queue overflow.\n");
-	}
-	else
-	{
-		printf("enter the data.\n");
-		scanf("%d",&data);
-		queue[top]=data;
-		top=top+1;
-	
-	}
+int first = 0, last = 0;  
+void enqueue() {
+    int data;
+    if (last == MAX) {  
+        printf("Queue Overflow.\n");
+    } else {
+        printf("Enter the data: ");
+        scanf("%d", &data);
+        queue[last] = data;
+        last++;  
+    }
 }
-void dequeue()
-{
-	if(top==0)
-	{
-		printf("queue is empty.\n");
-	}
-	else
-	{
-		printf("queue removed data =%d\n",queue[--top]);
-	}
+void dequeue() {
+    if (first == last) {  
+        printf("Queue Underflow.\n");
+    } else {
+        printf("Queue removed data = %d\n", queue[first]);
+        first++; 
+    }
 }
-void display()
-{
-	int i;
-	if(top==0)
-	{
-		printf("queue is empty\n");
-	}
-	else
-	{
-		for(i=0;i<top;i++)
-			printf("%d ",queue[i]);
-	}
-	printf("\n");
+void display() {
+    if (first == last) {  
+        printf("Queue is empty.\n");
+    } else {
+        printf("Queue elements: ");
+        for (int i = first; i < last; i++) {
+            printf("%d ", queue[i]);
+        }
+        printf("\n");
+    }
 }
-int main()
-{
-	int i,num;
-	printf(" 1.enqueue\n 2.dequeue\n 3.display\n");
-	while(1)
-	{
-	printf("enter the number\n");
-	scanf("%d",&num);
-	switch(num)
-	{
-		case 1: enqueue();
-				break;
-		case 2:dequeue();
-				break;
-		case 3:display();
-				break;
-		default:printf("enter the correct number..\n");
-		//exit (0);
-	}
-	}
+int main() {
+    int option;
+    while (1) {
+        printf("1. Enqueue\n2. Dequeue\n3. Display\n4. Exit\n");
+        printf("Enter the option: ");
+        scanf("%d", &option);
+
+        switch (option) {
+            case 1: enqueue(); break;
+            case 2: dequeue(); break;
+            case 3: display(); break;
+            case 4: return 0;  
+            default: printf("Enter a valid option.\n");
+        }
+    }
+    return 0;
 }
